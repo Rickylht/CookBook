@@ -2,9 +2,7 @@ package ViewPackage;
 
 
 import ControlPackage.RecipeShowController;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -26,8 +24,11 @@ public class RecipeShowView extends GridPane {
 	public TextArea StepsTextArea = new TextArea();
 	private Button BackButton = new Button("Back:");
 	private Button EditButton = new Button("Edit:");
+	
 	RecipeShowView(){	
-				
+		
+		this.setHgap(20);
+		this.setVgap(20);		
 		this.add(RecipeNameLabel, 0, 0,1,1);
 		this.add(RecipeNameTextField, 0, 1,1,1);
 		this.add(PreparationTimeLabel, 0, 2,1,1);
@@ -43,6 +44,20 @@ public class RecipeShowView extends GridPane {
 		this.add(BackButton, 0, 8,1,1);
 		this.add(EditButton, 1, 8,1,1);
 		
+	}
+	
+	public void control(){
+		BackButton.setOnAction(e -> {
+			RecipeShowController rsc = new RecipeShowController();
+			try {
+				RecipeNameTextField.setText(rsc.showrecipe().getName());
+				PreparationTimeTextField.setText(String.valueOf(rsc.showrecipe().getPrepareTime()));
+				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 	}
 	
 }

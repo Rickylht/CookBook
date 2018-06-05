@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.LinkedList;
 
 import EntityPackage.Recipe;
-import ViewPackage.RecipeShowView;
 
 @SuppressWarnings("restriction")
 
@@ -33,30 +32,26 @@ public class RecipeShowController {
 		}
 		return con;
 	}
-
-	public LinkedList<Recipe> showDetail() {
-		LinkedList<Recipe> ls = new LinkedList<Recipe>();
-		RecipeShowController c = new RecipeShowController();// 创建本类对象
-		con = c.getConnection();
-		try {
-			sql = con.createStatement();
-			res = sql.executeQuery("select * from recipe where name is like");// sql对大小写不敏感
-			while (res.next()) {
-				Recipe recipe = new Recipe();
-				recipe.setRecipeID(res.getString("ID"));
-				recipe.setName(res.getString("Name"));
-				recipe.setServeNumber(res.getInt("serveNumber"));
-				recipe.setPrepareTime(res.getDouble("PrepareTime"));
-				recipe.setCookTime(res.getDouble("cookTime"));
-				recipe.setCategory(res.getString("Category"));
-				recipe.setDescription(res.getString("Description"));
-				ls.add(recipe);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	public Recipe showrecipe() throws SQLException{				
+		con = this.getConnection();
+		sql = con.createStatement();
+		res = sql.executeQuery("select * from cookbook.recipe where ID = 1");// sql对大小写不敏感
+		Recipe recipe = new Recipe();
+		if (res.first()) {			
+			recipe.setRecipeID(res.getString("ID"));
+			recipe.setName(res.getString("Name"));
+			recipe.setServeNumber(res.getInt("serveNumber"));
+			recipe.setPrepareTime(res.getDouble("PrepareTime"));
+			recipe.setCookTime(res.getDouble("cookTime"));
+			recipe.setCategory(res.getString("Category"));
+			recipe.setDescription(res.getString("Description"));
+		}else{
+			
 		}
-		return ls;
+		return recipe;
 	}
+
+	
 
 		
 }

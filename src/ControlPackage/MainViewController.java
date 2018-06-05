@@ -49,8 +49,7 @@ public class MainViewController {
 				recipe.setCategory(res.getString("Category"));
 				recipe.setDescription(res.getString("Description"));
 				ls.add(recipe);
-				String name1 = res.getString("Name");
-				
+				String name1 = res.getString("Name");				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

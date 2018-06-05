@@ -1,6 +1,8 @@
 package ViewPackage;
 
 import javafx.scene.layout.GridPane;
-public class RecipeListView {
+
+public class RecipeListView extends GridPane {
+	
 
 }

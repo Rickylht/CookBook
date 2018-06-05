@@ -12,18 +12,21 @@ public class PreparationSteps {
 		this.StepsID = stepsID;
 		this.Description = description;
 	}
+	
 	public double getStepsID() {
 		return StepsID;
 	}
+	
 	public void setStepsID(double stepsID) {
 		StepsID = stepsID;
 	}
+	
 	public String getDescription() {
 		return Description;
 	}
+	
 	public void setDescription(String description) {
 		Description = description;
 	}
 	
-
 }

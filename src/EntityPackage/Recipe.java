@@ -1,6 +1,9 @@
 package EntityPackage;
 
+import java.util.*;
+
 public class Recipe {
+	
 	private String RecipeID;
 	private String Name;
 	private String Description;
@@ -8,11 +11,22 @@ public class Recipe {
 	private int ServeNumber;
 	private double PrepareTime;
 	private double CookTime;
-	private String Category;
+	private String Category;	
+	private Ingredients ingredients ;
+	private LinkedList<String> PreparationSteps;
+	
+	//构造方法
 	
 	public Recipe(){
 		
 	}
+	
+	public Recipe(String name , String category, String recipeid ){
+		this.RecipeID= recipeid ;
+		this.Name = name ; 
+		this.Category = category; 
+		this.PreparationSteps = new LinkedList<String>();		
+	}	
 
 	public Recipe(String recipeID, String title, String description, boolean privacy, int serveNumber,
 			double prepareTime, double cookTime, String category) {
@@ -26,12 +40,14 @@ public class Recipe {
 		this.Category = category;
 	}
 
+	//getter and setter
+	
 	public String getRecipeID() {
 		return RecipeID;
 	}
 
-	public void setRecipeID(String string) {
-		RecipeID = string;
+	public void setRecipeID(String recipeid) {
+		RecipeID = recipeid;
 	}
 
 	public String getName() {
@@ -88,6 +104,15 @@ public class Recipe {
 
 	public void setCategory(String category) {
 		Category = category;
+	}
+	
+	//function
+	public void addIngredient(Ingredients ingredients){
+		this.ingredients = ingredients ;
+	}
+	
+	public void addPreparationStep (String step ) {
+		steps.add(step);	
 	}
 
 	@Override

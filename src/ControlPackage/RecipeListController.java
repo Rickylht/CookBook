@@ -5,11 +5,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+
+import EntityPackage.Recipe;
 
 public class RecipeListController {
 	static Connection con;
 	static Statement sql;
 	static ResultSet res;
+	
 
 	public Connection getConnection() {
 		try {
@@ -26,6 +30,29 @@ public class RecipeListController {
 			e.printStackTrace();
 		}
 		return con;
+	}
+	public LinkedList<Recipe> showDetail() {
+		LinkedList<Recipe> ls = new LinkedList<Recipe>();
+		RecipeShowController c = new RecipeShowController();// 创建本类对象
+		con = c.getConnection();
+		try {
+			sql = con.createStatement();
+			res = sql.executeQuery("select * from recipe where name is like");// sql对大小写不敏感
+			while (res.next()) {
+				Recipe recipe = new Recipe();
+				recipe.setRecipeID(res.getString("ID"));
+				recipe.setName(res.getString("Name"));
+				recipe.setServeNumber(res.getInt("serveNumber"));
+				recipe.setPrepareTime(res.getDouble("PrepareTime"));
+				recipe.setCookTime(res.getDouble("cookTime"));
+				recipe.setCategory(res.getString("Category"));
+				recipe.setDescription(res.getString("Description"));
+				ls.add(recipe);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ls;
 	}
 
 }
