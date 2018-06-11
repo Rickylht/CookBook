@@ -5,35 +5,19 @@ public class Ingredients {
 	private String Name;
 	private double Amount;
 	private String Unit;
-	private String RecipeID;
-	private String Method;
+	private String Description;
 	
-
 	public Ingredients(){
 		
 	}
 	
-	public Ingredients(String name, double amount, String unit){
-		this.Name = name;
-		this.Amount = amount;
-		this.Unit = unit;		
-	}
-	
-	public Ingredients(String name, double amount, String unit, String method){
+	public Ingredients(String name, double amount, String unit, String description ){
 		this.Name = name;
 		this.Amount = amount;
 		this.Unit = unit;
-		this.Method = method;
+		this.Description = description;
 	}
-	
-	public Ingredients(double ingredientsID, String name, double amount, String unit, String recipeID) {		
-		this.IngredientsID = ingredientsID;
-		this.Name = name;
-		this.Amount = amount;
-		this.Unit = unit;
-		this.RecipeID = recipeID;
-	}
-	
+		
 	public double getIngredientsID() {
 		return IngredientsID;
 	}
@@ -66,20 +50,9 @@ public class Ingredients {
 		Unit = unit;
 	}
 	
-	public String getRecipeID() {
-		return RecipeID;
-	}
-	
-	public void setRecipeID(String recipeID) {
-		RecipeID = recipeID;
-	}
-	
-	public String getMethod() {
-		return Method;
-	}
-
-	public void setMethod(String method) {
-		Method = method;
-	}
-		
+	public String toString() {
+		String Tostring  =  new String();
+		Tostring = this.Name +" "+ String.valueOf(this.Amount)+" "+ this.Unit +" ("+this.Description+") \n";		
+		return Tostring;
+	}		
 }

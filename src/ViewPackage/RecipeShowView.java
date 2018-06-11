@@ -1,7 +1,7 @@
 package ViewPackage;
 
 
-import ControlPackage.RecipeShowController;
+import ControlPackage.DatabaseController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
@@ -44,20 +44,19 @@ public class RecipeShowView extends GridPane {
 		this.add(BackButton, 0, 8,1,1);
 		this.add(EditButton, 1, 8,1,1);
 		
-	}
-	
-	public void control(){
-		BackButton.setOnAction(e -> {
-			RecipeShowController rsc = new RecipeShowController();
-			try {
-				RecipeNameTextField.setText(rsc.showrecipe().getName());
-				PreparationTimeTextField.setText(String.valueOf(rsc.showrecipe().getPrepareTime()));
-				
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
+		DatabaseController rsc = new DatabaseController();
+		
+		try {
+			RecipeNameTextField.setText(rsc.showrecipe().getName());
+			PreparationTimeTextField.setText(String.valueOf(rsc.showrecipe().getPrepareTime()));
+			CookTimeTextField.setText(String.valueOf(rsc.showrecipe().getCookTime()));
+			CategoryTextField.setText(rsc.showrecipe().getCategory());
+							
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 	
 }

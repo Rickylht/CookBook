@@ -3,6 +3,7 @@ package EntityPackage;
 public class PreparationSteps {
 	private double StepsID;
 	private String Description;
+	private double Order;
 	
 	public PreparationSteps(){
 		
@@ -27,6 +28,20 @@ public class PreparationSteps {
 	
 	public void setDescription(String description) {
 		Description = description;
+	}
+	
+	public double getOrder() {
+		return Order;
+	}
+
+	public void setOrder(double order) {
+		Order = order;
+	}
+	
+	public String toString() {
+		String string  =  new String();
+		string = this.Order +" :"+ this.Description+" \n";
+		return string;
 	}
 	
 }

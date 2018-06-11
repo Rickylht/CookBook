@@ -4,49 +4,60 @@ import java.util.*;
 
 public class Recipe {
 	
-	private String RecipeID;
+	private int RecipeID;
 	private String Name;
 	private String Description;
-	private boolean Privacy;
+	private int Privacy;
 	private int ServeNumber;
-	private double PrepareTime;
-	private double CookTime;
+	private int PrepareTime;
+	private int CookTime;
 	private String Category;	
-	private Ingredients ingredients ;
-	private LinkedList<String> PreparationSteps;
-	
-	//构造方法
-	
+	private LinkedList<PreparationSteps> PreparationSteps;
+	private LinkedList<Ingredients> ingredientlist;
+	private int Rate;
+	private String Comments;
+
 	public Recipe(){
 		
 	}
 	
-	public Recipe(String name , String category, String recipeid ){
-		this.RecipeID= recipeid ;
-		this.Name = name ; 
-		this.Category = category; 
-		this.PreparationSteps = new LinkedList<String>();		
-	}	
-
-	public Recipe(String recipeID, String title, String description, boolean privacy, int serveNumber,
-			double prepareTime, double cookTime, String category) {
-		this.RecipeID = recipeID;
-		this.Name = title;
-		this.Description = description;
-		this.Privacy = privacy;
-		this.ServeNumber = serveNumber;
-		this.PrepareTime = prepareTime;
-		this.CookTime = cookTime;
-		this.Category = category;
+	public int getRate() {
+		return Rate;
 	}
 
-	//getter and setter
+	public void setRate(int rate) {
+		Rate = rate;
+	}
+
+	public String getComments() {
+		return Comments;
+	}
+
+	public void setComments(String comments) {
+		this.Comments = comments;
+	}
 	
-	public String getRecipeID() {
+	public LinkedList<PreparationSteps> getPreparationSteps() {
+		return PreparationSteps;
+	}
+
+	public void setPreparationSteps(LinkedList<PreparationSteps> preparationSteps) {
+		this.PreparationSteps = preparationSteps;
+	}
+
+	public LinkedList<Ingredients> getIngredientlist() {
+		return ingredientlist;
+	}
+
+	public void setIngredientlist(LinkedList<Ingredients> ingredientlist) {
+		this.ingredientlist = ingredientlist;
+	}
+	
+	public int getRecipeID() {
 		return RecipeID;
 	}
 
-	public void setRecipeID(String recipeid) {
+	public void setRecipeID(int recipeid) {
 		RecipeID = recipeid;
 	}
 
@@ -66,11 +77,11 @@ public class Recipe {
 		Description = description;
 	}
 
-	public boolean isPrivacy() {
+	public int getPrivacy() {
 		return Privacy;
 	}
 
-	public void setPrivacy(boolean privacy) {
+	public void setPrivacy(int privacy) {
 		Privacy = privacy;
 	}
 
@@ -82,19 +93,19 @@ public class Recipe {
 		ServeNumber = serveNumber;
 	}
 
-	public double getPrepareTime() {
+	public int getPrepareTime() {
 		return PrepareTime;
 	}
 
-	public void setPrepareTime(double prepareTime) {
+	public void setPrepareTime(int prepareTime) {
 		PrepareTime = prepareTime;
 	}
 
-	public double getCookTime() {
+	public int getCookTime() {
 		return CookTime;
 	}
 
-	public void setCookTime(double cookTime) {
+	public void setCookTime(int cookTime) {
 		CookTime = cookTime;
 	}
 
@@ -104,19 +115,7 @@ public class Recipe {
 
 	public void setCategory(String category) {
 		Category = category;
-	}
-	
-	//function
-	public void addIngredient(Ingredients ingredients){
-		this.ingredients = ingredients ;
-	}
-	
-	public void addPreparationStep (String step ) {
-		steps.add(step);	
-	}
+	}	
 
-	@Override
-	public String toString() {
-		return ("ID:" + this.RecipeID + "name:" + this.Name + "Description"+this.Description+"privicy"+this.Privacy+"serveNumber"+this.ServeNumber+"PrepareTime"+this.PrepareTime+"CookTime"+this.CookTime);
-	}
+	
 }

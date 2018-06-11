@@ -8,8 +8,7 @@ import javafx.stage.Stage;
 
 public class TestView extends Application  {
 	public void start(Stage stage){
-		RecipeShowView test = new RecipeShowView();	
-		test.control();
+		LoginView test = new LoginView();	
 		Scene scene = new Scene(test,1000,600);
 		stage.setScene(scene);
 		stage.show();			
@@ -17,6 +16,5 @@ public class TestView extends Application  {
 	
 	public static void main(String args[]) {
 		launch();
-	}
-	
+	}	
 }

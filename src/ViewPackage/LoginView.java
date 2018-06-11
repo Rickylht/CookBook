@@ -1,12 +1,15 @@
 package ViewPackage;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
-import ControlPackage.LogController;
+import javafx.stage.*;  
+
+import ControlPackage.DatabaseController;
 
 @SuppressWarnings("restriction")
 
@@ -23,8 +26,7 @@ public class LoginView extends GridPane {
 	TextField NewAccountNameTextField = new TextField();
 	Label NewAccountPasswordLabel = new Label("password: ");
 	TextField NewAccountPasswordTextField = new TextField();
-	
-	
+		
 	public LoginView() {
 		this.setHgap(20);
 		this.setVgap(20);
@@ -40,16 +42,26 @@ public class LoginView extends GridPane {
 		this.add(NewAccountPasswordLabel,1,7);
 		this.add(NewAccountPasswordTextField, 2, 7);
 		this.add(NewAccountBuuton, 1, 8);
-	}
-	
-	public void CONTROL(){
+		
 		LoginButton.setOnAction(e -> {
 			String Sname = UserNameTextField.getText();
 			String Spasswpord = UserPasswordTextField.getText();
-			LogController  l1 = new LogController();			
+			DatabaseController  dc = new DatabaseController();			
 			try {
-				if(l1.log(Sname,Spasswpord)){
+				if(dc.login(Sname,Spasswpord)==1){
 					LoginButton.setText("log in successfully");
+					RecipeShowView rsv = new RecipeShowView();
+					try  
+		            {  						
+						Scene scene = new Scene(rsv,1000,600);
+						Stage stage = new Stage();
+						stage.setScene(scene);
+						stage.show();						
+		            }   
+		            catch (Exception e1)  
+		            {  
+		                e1.printStackTrace();  
+		            } 
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -59,10 +71,11 @@ public class LoginView extends GridPane {
 		NewAccountBuuton.setOnAction(e -> {
 			NewAccountBuuton.setText("create successfully");
 			String Cname = NewAccountNameTextField.getText();
-			String Cpassword = NewAccountPasswordTextField.getText();
-			LogController  l2 = new LogController();
+			String Cpassword1 = NewAccountPasswordTextField.getText();
+			String Cpassword2 = "12345";
+			DatabaseController  dc = new DatabaseController();
 			try{
-				if(l2.create(Cname, Cpassword)){
+				if(dc.create(Cname, Cpassword1,Cpassword2)){
 					NewAccountBuuton.setText("create successfully");
 				}
 			}catch (Exception e1) {
@@ -70,5 +83,6 @@ public class LoginView extends GridPane {
 				e1.printStackTrace();
 			}
 		});		
-	}	
+	}
 }
+	
