@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import EntityPackage.Ingredients;
@@ -183,13 +184,13 @@ public class DatabaseController {
 	
 	
 	
-	//show searching recipe list 方法
+	//show searching recipe list 方法.我并没有实现A用户输入的菜谱名和B用户自己create的菜谱同名这个功能
 	public LinkedList<Recipe> showsearchingrecipelist(int userid,String s) {
 		con = this.getConnection();
-		LinkedList<Recipe> ls = new LinkedList<Recipe>();
-		String ss = "select * from recipe where name is like '%"+s+"%'";
+		LinkedList<Recipe> ls = new LinkedList<Recipe>();		
 		try {
 			sql = con.createStatement();
+			String ss = "select * from cookbook.recipe where name is like '%"+s+"%'";
 			res = sql.executeQuery(ss);
 			while (res.next()) {
 				Recipe recipe = new Recipe();
@@ -214,11 +215,26 @@ public class DatabaseController {
 	//create recipe 方法
 	public boolean createrecipe(int userid,Recipe recipe){
 		con = this.getConnection();
-		int recipeid;
-		String ss1 = "INSERT INTO `cookbook`.`recipe` (`Name`, `ServeNumber`, `Privacy`, `PrepareTime`, `Category`, `Description`, `CookTime`) values('"+
-				recipe.getName()+"',"+recipe.getServeNumber()+","+recipe.getPrivacy()+","+recipe.getPrepareTime()+",'"+recipe.getCategory()+"','"+recipe.getDescription()+"',"+recipe.getCookTime();
+		int i = 0;
+		int recipeid;	
 		try {
+			String ss1 = "INSERT INTO `cookbook`.`recipe` (`Name`, `ServeNumber`, `Privacy`, `PrepareTime`, `Category`, `Description`, `CookTime`) values('"+
+					recipe.getName()+"',"+recipe.getServeNumber()+","+recipe.getPrivacy()+","+recipe.getPrepareTime()+",'"+recipe.getCategory()+"','"+recipe.getDescription()+"',"+recipe.getCookTime();
 			int res1 = sql.executeUpdate(ss1);
+			if(res1 == 1){
+				i=i++;
+			}
+			
+			String ss = "select * from `cookbook`.`recipe` where Name = '"+recipe.getName()+"'";
+			res = sql.executeQuery(ss);
+			recipeid = res.getInt("ID");
+			LinkedList<Ingredients> ls1 = recipe.getIngredientlist();
+			Iterator iter1 = ls1.iterator();
+			while(iter1.hasNext()){
+				String ss2 = "INSERT INTO `cookbook`.`ingredients` (`Name`, `RecipeID`, `Amount`, `Unit`, `Description`) values('"+
+			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
